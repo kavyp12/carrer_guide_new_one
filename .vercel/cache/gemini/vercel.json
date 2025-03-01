@@ -1,0 +1,66 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/auth.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/marks.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/questionnaire.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/db.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/gemini.py",
+      "use": "@vercel/python"
+    },
+    {
+      "src": "dist/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/auth/(.*)",
+      "dest": "/api/auth.js"
+    },
+    {
+      "src": "/api/marks",
+      "dest": "/api/marks.js"
+    },
+    {
+      "src": "/marks",
+      "dest": "/api/marks.js"
+    },
+    {
+      "src": "/api/questionnaire/(.*)",
+      "dest": "/api/questionnaire.js"
+    },
+    {
+      "src": "/api/submit-assessment",
+      "dest": "/api/gemini.py"
+    },
+    {
+      "src": "/api/download-report/(.*)",
+      "dest": "/api/gemini.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/dist/$1"
+    }
+  ],
+  "env": {
+    "JWT_SECRET": "@jwt_secret",
+    "MONGO_URI": "@mongo_uri",
+    "GOOGLE_API_KEY": "@google_api_key",
+    "GOOGLE_DRIVE_CREDENTIALS": "@google_drive_credentials",
+    "GOOGLE_DRIVE_FOLDER_ID": "@google_drive_folder_id"
+  }
+}

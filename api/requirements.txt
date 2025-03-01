@@ -1,0 +1,5 @@
+google-generativeai
+reportlab
+requests
+PyGithub
+python-dotenv
